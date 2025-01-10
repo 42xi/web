@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacts</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="profile.jpeg" type="image/jpeg" />
+</head>
+
+<body>
+  <header>
+    <div class="hamburger" id="hamburger">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="uni.html">UNI</a></li>
+      <li><a href="chat.html">CHAT</a></li>
+      <li><a href="games.html">GAMES</a></li>
+      <li><a href="kontakt.html" class="active">CONTACTS</a></li>
+    </ul>
+  </header>
+
+  <section class="profile">
+    <div class="profile-content">
+      <div class="text-info">
+        <h1>Contacts</h1>
+        <p>
+          For further information or to schedule an appointment, you can reach me at:
+        </p>
+        <br />
+
+        <div class="social-links">
+          <a href="mailto:42xi@proton.me" target="_blank">
+            <img src="https://img.icons8.com/?size=100&id=13754&format=png&color=000000" alt="Mail" /></a>
+
+
+
+
+          <a href="https://www.instagram.com/_xi_42_" target="_blank">
+            <img src="https://img.icons8.com/?size=100&id=32323&format=png&color=000000" alt="Instagram" />
+          </a>
+
+          <a href="https://www.x.com/_xi_42_" target="_blank">
+            <img src="https://img.icons8.com/?size=100&id=ClbD5JTFM7FA&format=png&color=000000" alt="Twitter" />
+          </a>
+
+          <a href="https://www.reddit.com/user/42xi/" target="_blank">
+            <img src="https://img.icons8.com/?size=100&id=nudbJyiwsYUs&format=png&color=000000" alt="Twitter" />
+          </a>
+
+
+
+
+
+
+
+
+
+        </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 XI 42. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.getElementById("nav-links");
+
+      hamburger.addEventListener("click", function () {
+        navLinks.classList.toggle("show");
+        hamburger.classList.toggle("open");
+      });
+    });
+  </script>
+</body>
+
+</html>

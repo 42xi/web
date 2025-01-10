@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XI42 - Chat Room</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="profile.jpeg" type="image/jpeg" />
+    <script type="module">
+        // Importiere Firebase-Funktionen
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+        import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+
+        // Firebase-Konfiguration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBdsPaYClpDpj7aigRVFtLC57ytqGqcSV4",
+            authDomain: "xi42-web.firebaseapp.com",
+            databaseURL: "https://xi42-web-default-rtdb.firebaseio.com",
+            projectId: "xi42-web",
+            storageBucket: "xi42-web.firebasestorage.app",
+            messagingSenderId: "651338386059",
+            appId: "1:651338386059:web:fc9dfd2c50e5efc962228e",
+            measurementId: "G-XGYTNFYBB1"
+        };
+
+        // Firebase initialisieren
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const messagesDiv = document.getElementById('messages');
+            const chatInput = document.getElementById('chatInput');
+            const sendButton = document.getElementById('sendButton');
+
+            // Referenz zur Datenbank
+            const messagesRef = ref(database, 'messages');
+
+            // Benutzername überprüfen oder abfragen
+            let userName = localStorage.getItem('userName');
+            if (!userName) {
+                userName = prompt("Bitte gib deinen Namen ein:") || "Anonym";
+                localStorage.setItem('userName', userName); // Name im Local Storage speichern
+            }
+
+            // Nachrichten anzeigen
+            function displayMessage(id, name, text, timestamp) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message');
+                messageElement.setAttribute('data-id', id);
+                messageElement.innerHTML = `
+                    <span class="user-name">${name}</span>: 
+                    <span class="message-text">${text}</span>
+                `;
+                messagesDiv.appendChild(messageElement);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+                // Nachricht nach 30 Sekunden entfernen
+                setTimeout(() => {
+                    remove(ref(database, `messages/${id}`));
+                }, 30000);
+            }
+
+            // Auf neue Nachrichten lauschen
+            onValue(messagesRef, (snapshot) => {
+                messagesDiv.innerHTML = ''; // Nachrichtenbereich leeren
+                snapshot.forEach((childSnapshot) => {
+                    const id = childSnapshot.key;
+                    const { name, text, timestamp } = childSnapshot.val();
+                    displayMessage(id, name, text, timestamp);
+                });
+            });
+
+            // Nachricht senden
+            sendButton.addEventListener('click', () => {
+                const text = chatInput.value.trim();
+                if (text) {
+                    const timestamp = Date.now();
+                    push(messagesRef, { name: userName, text, timestamp });
+
+                    chatInput.value = ''; // Eingabefeld leeren
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="hamburger" id="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="uni.html">UNI</a></li>
+            <li><a href="chat.html" class="active">CHAT</a></li>
+            <li><a href="games.html">GAMES</a></li>
+            <li><a href="kontakt.html">CONTACTS</a></li>
+        </ul>
+    </header>
+
+    <section class="chat-container">
+        <div class="text-info">
+            <h1>Chat Room</h1>
+            <p>Chat Anonym with no fear; have fun and show some respect :-)</p>
+            <div id="messages" class="chat-messages"></div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Schreibe hier deine Nachricht..." />
+                <button id="sendButton">Senden</button>
+            </div>
+        </div>
+    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const hamburger = document.getElementById("hamburger");
+            const navLinks = document.getElementById("nav-links");
+
+            hamburger.addEventListener("click", function () {
+                navLinks.classList.toggle("show");
+                hamburger.classList.toggle("open");
+            });
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2025 XI 42. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

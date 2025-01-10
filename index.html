@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XI42 - Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <header>
+    <div class="hamburger" id="hamburger">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" class="active">HOME</a></li>
+      <li><a href="uni.html">UNI</a></li>
+      <li><a href="chat.html">CHAT</a></li>
+      <li><a href="games.html">GAMES</a></li>
+      <li><a href="kontakt.html">CONTACTS</a></li>
+    </ul>
+  </header>
+
+  <section class="profile">
+    <div class="profile-content">
+      <div class="text-info">
+        <h1>XI 42</h1>
+        <p>Welcome to my website!</p>
+        <p>I hope you find everything you need :-)</p>
+      </div>
+      <div class="profile-pic">
+        <img src="profile.jpeg" alt="Profile Picture">
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 XI 42. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.getElementById("nav-links");
+
+      hamburger.addEventListener("click", function () {
+        navLinks.classList.toggle("show");
+        hamburger.classList.toggle("open");
+      });
+    });
+  </script>
+</body>
+
+</html>

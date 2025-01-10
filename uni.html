@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uni</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="profile.jpeg" type="image/jpeg" />
+  <script>
+
+
+    function checkPasswordForSemester(semesterUrl) {
+      var password = prompt(
+        "Please enter the password to access this Semester:"
+      );
+      if (password === "404") {
+        window.location.href = semesterUrl;
+      } else {
+        alert("Incorrect password! Please try again!");
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <div class="hamburger" id="hamburger">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="uni.html" class="active">UNI</a></li>
+      <li><a href="chat.html">CHAT</a></li>
+      <li><a href="games.html">GAMES</a></li>
+      <li><a href="kontakt.html">CONTACTS</a></li>
+    </ul>
+  </header>
+
+  <section class="profile">
+    <div class="profile-content">
+      <div class="text-info">
+        <h1>University Profile</h1>
+        <p>
+          Welcome to my university page. Choose your semester to get started!
+        </p>
+        <br />
+
+
+        <a href="#" class="semester-btn"
+          onclick="checkPasswordForSemester('https://github.com/42xi/uni/tree/main/Sem.1')">Semester
+          1</a>
+
+        <a href="#" class="semester-btn"
+          onclick="checkPasswordForSemester('https://github.com/42xi/uni/tree/main/Sem.2')">Semester
+          2</a>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 XI 42. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.getElementById("nav-links");
+
+      hamburger.addEventListener("click", function () {
+        navLinks.classList.toggle("show");
+        hamburger.classList.toggle("open");
+      });
+    });
+  </script>
+</body>
+
+</html>
